@@ -1,0 +1,19 @@
+[project]
+name = "notion-vault-cli"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "cryptography>=48.0.0",
+    "prompt-toolkit>=3.0.52",
+    "pyperclip>=1.11.0",
+    "rich>=15.0.0",
+]
+
+[project.scripts]
+notion-vault = "notion_vault_cli:main"
+notion-vault-cli = "notion_vault_cli:main"
+
+[tool.uv]
+package = true
