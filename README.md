@@ -1,212 +1,113 @@
-# Notion Vault CLI
+# 🔐 Notion Vault CLI
 
-Notion Vault CLI is a local, encrypted password vault you talk to in plain English.
+[![PyPI version](https://img.shields.io/pypi/v/notion-vault-cli.svg)](https://pypi.org/project/notion-vault-cli/)
+[![Python versions](https://img.shields.io/pypi/pyversions/notion-vault-cli.svg)](https://pypi.org/project/notion-vault-cli/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-It stores passwords, usernames, and small private notes on your machine only. There is no cloud sync, no browser extension, and no account setup. You open the vault with one master password, then ask for what you need with commands like:
+**Notion Vault CLI** is a private, encrypted password vault that you talk to in plain English. 
 
-```text
-save github in personal as ali
-what's my github password in personal
-list all
-remember my uni email is ali@student.edu
-```
+It stores passwords, usernames, and small private notes on your machine only. There is no cloud sync, no browser extension, and no account setup. You open the vault with one master password, then ask for what you need using natural language.
 
-## Features
+---
 
-- Local encrypted storage using `cryptography`
-- Natural-language style CLI commands
-- Folder-based organization such as `Personal`, `Education`, `Business`, or custom folders
-- Multi-word folder and service names such as `borlo labs` or `notion vault`
-- Password generation with clipboard auto-clear
-- Search, move, delete, and quick listing commands
-- Small fact memory for things like emails, IDs, or Wi-Fi labels
-- Rich terminal panels and tables for a more interactive CLI experience
+## ✨ Key Features
 
-## Requirements
+- 🧠 **Natural Language Interface**: Save and retrieve data using intuitive sentences.
+- 🛡️ **Zero-Knowledge Encryption**: Local storage using `cryptography` (AES-256).
+- 📁 **Dynamic Folders**: Organize entries into `Personal`, `Work`, or custom folders on the fly.
+- 📋 **Secure Clipboard**: Automatic clipboard clearing after 15 seconds.
+- ⚡ **Rich UI**: Interactive tables, panels, and progress indicators.
+- 💾 **Small Facts**: Remember Wi-Fi codes, IDs, or emails without full login entries.
+- 🏠 **100% Local**: Your data never leaves your machine.
 
-- Python `3.14+`
-- `uv`
+---
 
-## Install
+## 🚀 Installation
 
+### Using pip (Recommended)
+Install directly from [PyPI](https://pypi.org/project/notion-vault-cli/):
 ```powershell
-uv sync
+pip install notion-vault-cli
 ```
 
-## Run
+### For Developers
+If you want to contribute or run from source:
+1. Clone the repository:
+   ```powershell
+   git clone https://github.com/abm1119/Notion-Vault-CLI.git
+   cd Notion-Vault-CLI
+   ```
+2. Install dependencies using `uv`:
+   ```powershell
+   uv sync
+   ```
 
+---
+
+## 🛠️ Getting Started
+
+### 1. Launch the Vault
 ```powershell
-uv run notion-vault
+notion-vault
 ```
+*(On first run, you will be prompted to create your Master Password. **Do not lose it!**)*
 
-This project also installs:
-
-```powershell
-uv run notion-vault-cli
-```
-
-## First Run
-
-On first launch, Notion Vault CLI will ask you to create a master password.
-
-It stores local files in your home directory:
-
-- `~/.notion_vault.db` for new vaults
-- `~/.notion_vault.salt` for the key-derivation salt
-- `~/.notion_vault.history` for prompt history
-
-It also recognizes the older legacy files:
-
-- `~/.pma_vault.db`
-- `~/.pma_salt`
-- `~/.pma_history`
-
-If those older files already exist, the CLI will continue using them.
-
-## Command Guide
-
-### Save a login
-
+### 2. Save Your First Login
 ```text
-save github in personal as ali
-save notion vault in borlo labs as ali.work
-add figma to client work
+save github in Personal as abm1119
 ```
+The vault will prompt you for the password. Leave it blank to **auto-generate** a secure one.
 
-If you leave the password blank when prompted, the CLI generates one for you.
-
-### Retrieve a password
-
+### 3. Retrieve it
 ```text
-what's my github password in personal
-show github
-get notion vault from borlo labs
+what's my github password in Personal
 ```
 
-### List saved entries
+---
 
-```text
-list all
-list personal
-list borlo labs
-show passwords
-```
+## 📖 Command Guide
 
-### Search
+| Action | Example Command |
+| :--- | :--- |
+| **Save** | `save netflix in entertainment as me@email.com` |
+| **Get Password** | `show github` or `get aws from work` |
+| **List Entries** | `list all`, `list personal`, `show passwords` |
+| **Search** | `find bank`, `search for figma` |
+| **Clipboard** | `copy github`, `copy my personal aws password` |
+| **Facts** | `remember my uni email is me@edu.com`, `what is my uni email?` |
+| **Organize** | `move aws from business to cloud` |
+| **Delete** | `delete github from personal` |
+| **Utilities** | `folders`, `summary`, `generate password 24`, `help` |
 
-```text
-find github
-search for aws
-```
+---
 
-### Move between folders
+## 🔒 Security Architecture
 
-```text
-move aws from business to client work
-```
+- **Encryption**: Data is encrypted using `Fernet` (symmetric encryption) which uses AES-256 in CBC mode with HMAC-SHA256.
+- **Key Derivation**: Your Master Password is never stored. We use `PBKDF2HMAC` with a unique local salt to derive the encryption key.
+- **Local Files**:
+  - `~/.notion_vault.db`: The encrypted SQLite database.
+  - `~/.notion_vault.salt`: Your unique derivation salt.
+  - `~/.notion_vault.history`: Local command history for easy recall.
 
-### Delete an entry
+---
 
-```text
-delete github from personal
-```
+## 🤝 Contributing
 
-### Generate a password
+Contributions are welcome! Whether it's a bug fix, a new feature, or better natural language parsing:
 
-```text
-generate password
-generate password 24
-```
+1. Fork the Project.
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the Branch (`git checkout push origin feature/AmazingFeature`).
+5. Open a Pull Request.
 
-### Copy a password to clipboard
+---
 
-```text
-copy github
-copy my github password from personal
-```
+## 📄 License
 
-If clipboard support is available, the copied password is cleared after 15 seconds.
+Distributed under the MIT License. See `LICENSE` for more information.
 
-### Store and recall facts
+---
 
-```text
-remember my uni email is ali@student.edu
-what is my uni email
-recall my uni email
-```
-
-### Built-in utility views
-
-```text
-help
-folders
-summary
-quit
-```
-
-## Folder Behavior
-
-Notion Vault starts with:
-
-- `Personal`
-- `Education`
-- `Business`
-
-You can create a new folder simply by saving something into it:
-
-```text
-save figma in borlo labs as ali
-```
-
-That creates `Borlo Labs` automatically if it does not already exist.
-
-## Security Notes
-
-- Passwords are encrypted before being stored in SQLite
-- The salt is stored separately in your home directory
-- Everything runs locally on your machine
-- Clipboard clearing is best-effort and depends on system clipboard support
-- If you lose your master password, there is no recovery flow in this version
-
-## Project Layout
-
-- [notion_vault_cli.py](./notion_vault_cli.py) contains the full CLI
-- [pyproject.toml](./pyproject.toml) defines packaging and command entry points
-- [uv.lock](./uv.lock) locks dependencies
-- [Password-agent-design.html](./Password-agent-design.html) is a design/manual mockup
-
-## Development
-
-Install dependencies:
-
-```powershell
-uv sync
-```
-
-Run the module directly:
-
-```powershell
-uv run python notion_vault_cli.py
-```
-
-Check syntax:
-
-```powershell
-uv run python -m py_compile notion_vault_cli.py
-```
-
-## Current Scope
-
-This is a single-file CLI application. It is intentionally simple and currently focuses on:
-
-- local vault storage
-- natural-language commands
-- terminal interaction
-
-It does not currently include:
-
-- cloud sync
-- browser autofill
-- multi-user accounts
-- export/import workflows
-- a GUI
+**Developed with ❤️ by [abm1119](https://github.com/abm1119)**
