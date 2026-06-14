@@ -8,6 +8,9 @@
 
 It stores passwords, usernames, and small private notes on your machine only. There is no cloud sync, no browser extension, and no account setup. You open the vault with one master password, then ask for what you need using natural language.
 
+
+https://github.com/user-attachments/assets/37420ac2-6b36-45cb-9e48-bdb5ea8c940f
+
 ---
 
 ## ✨ Key Features
